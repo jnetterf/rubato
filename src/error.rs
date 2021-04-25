@@ -21,7 +21,7 @@ pub enum CpuFeature {
 impl CpuFeature {
     /// Test if the given CPU feature is detected.
     pub fn is_detected(&self) -> bool {
-        match self {
+        match *self {
             #[cfg(target_arch = "x86_64")]
             CpuFeature::Sse3 => {
                 is_x86_feature_detected!("sse3")
@@ -44,7 +44,7 @@ impl CpuFeature {
 
 impl fmt::Display for CpuFeature {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
+        match *self {
             #[cfg(target_arch = "x86_64")]
             CpuFeature::Sse3 => {
                 write!(f, "sse3")

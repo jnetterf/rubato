@@ -47,6 +47,26 @@ jobs:
         with:
           command: test
 
+  wasm32_build:
+    name: Build on wasm32-unknown-unknown
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+
+      - name: Run cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --target wasm32-unknown-unknown
+
   lints:
     name: Lints
     runs-on: ubuntu-latest
